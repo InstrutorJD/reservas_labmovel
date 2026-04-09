@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromebook Manager PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="test-indicator" class="test-indicator">MODO DE TESTE ATIVO - HORA SIMULADA</div>
+
+<div class="app-container">
+    <div class="date-scroll" id="dates-container"></div>
+    <div class="status-header">
+        <h3>Status</h3>
+        <div class="period-selector">
+            <label for="view-periodo" class="sr-only">Período</label>
+            <select id="view-periodo" class="dark-input"></select>
+        </div>
+    </div>
+    <div class="grid-container" id="main-grid"></div>
+    <button id="open-modal-btn" class="btn-main reserve-button">+ Reservar</button>
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal-card">
+        <h2>Reservar</h2>
+        <input type="text" id="prof-nome" class="dark-input" placeholder="Seu Nome">
+        <div class="selection-grid" id="modal-selection-grid"></div>
+        <div class="hours-grid">
+            <div class="hour-chip" data-h="1">1h (07:00)</div>
+            <div class="hour-chip" data-h="2">2h (07:50)</div>
+            <div class="hour-chip" data-h="3">3h (09:00)</div>
+            <div class="hour-chip" data-h="4">4h (09:50)</div>
+            <div class="hour-chip" data-h="5">5h (10:40)</div>
+            <div class="hour-chip" data-h="6">6h (12:20)</div>
+            <div class="hour-chip" data-h="7">7h (13:10)</div>
+        </div>
+        <input type="date" id="res-data-input" class="dark-input">
+        <div class="modal-actions">
+            <button id="confirm-reservation-btn" class="btn-main">Finalizar</button>
+            <button id="close-modal-btn" type="button" class="secondary-button">Voltar</button>
+        </div>
+    </div>
+</div>
+
+<div class="alert-overlay" id="alert-overlay" aria-live="assertive" role="alertdialog" aria-modal="true" aria-hidden="true" style="display:none;">
+    <div class="alert-card" id="alert-card">
+        <div class="alert-heading" id="alert-heading">Aviso</div>
+        <div class="alert-message" id="alert-message">Mensagem do alerta</div>
+        <div class="alert-actions">
+            <button id="alert-close-btn" class="btn-main">Ok</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

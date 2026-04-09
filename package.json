@@ -1,0 +1,9 @@
+{
+  "name": "reservas_labmovel",
+  "version": "1.0.0",
+  "description": "App responsivo para reserva de Chromebooks com testes unitários separados.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-tests.js"
+  }
+}
