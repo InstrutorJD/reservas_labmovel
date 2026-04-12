@@ -117,6 +117,10 @@ body {
     transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
 
+.chrome-card.clickable {
+    cursor: pointer;
+}
+
 .chrome-card:hover {
     transform: translateY(-2px);
 }
@@ -198,6 +202,11 @@ body {
 .select-item.selected {
     background: var(--primary);
     border-color: rgba(255,255,255,0.18);
+}
+
+.select-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .hours-grid {
@@ -318,11 +327,16 @@ body {
 .alert-actions {
     display: flex;
     justify-content: center;
+    gap: 10px;
 }
 
-.alert-actions .btn-main {
-    width: auto;
+.alert-actions .btn-main,
+.alert-actions .secondary-button {
     min-width: 120px;
+}
+
+.alert-actions .secondary-button {
+    width: auto;
 }
 
 .modal-actions {
@@ -337,22 +351,16 @@ body {
     color: var(--text-sec);
     font-size: 0.95rem;
     cursor: pointer;
-}
-
-.test-indicator {
-    position: fixed;
-    inset: 0 auto auto 0;
-    background: #eab308;
-    color: #000;
-    text-align: center;
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 6px 0;
-    z-index: 2000;
-    display: none;
+    border-radius: 20px;
+    padding: 14px;
 }
 
 .sr-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -421,4 +429,10 @@ body {
         padding: 20px;
         border-radius: 24px 24px 0 0;
     }
+}
+
+.hour-chip.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
 }

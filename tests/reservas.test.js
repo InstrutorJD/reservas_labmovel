@@ -24,7 +24,7 @@ function testGetPeriodoFromTime() {
     assert.strictEqual(getPeriodoFromTime(9, 30), '3');
     assert.strictEqual(getPeriodoFromTime(12, 30), '6');
     assert.strictEqual(getPeriodoFromTime(13, 30), '7');
-    assert.strictEqual(getPeriodoFromTime(14, 0), '1');
+    assert.strictEqual(getPeriodoFromTime(14, 0), null);
 }
 
 function testGenerateFutureBusinessDates() {
@@ -72,6 +72,15 @@ function testConfirmarReservas() {
     assert.strictEqual(result.success, true);
     assert.strictEqual(result.reservas.length, 4);
     assert.strictEqual(result.reservas[0].periodo, '2');
+}
+
+function testConfirmarReservasConflito() {
+    const initial = [
+        { professor: 'Teste', data: '2026-04-10', periodo: '2', chromebook_id: 1 }
+    ];
+    const result = confirmarReservas('João', '2026-04-10', [2], [1], initial);
+    assert.strictEqual(result.success, false);
+    assert.strictEqual(result.message, 'Um ou mais Chromebooks já estão reservados para a data e período selecionados.');
 }
 
 function testOcupacao() {

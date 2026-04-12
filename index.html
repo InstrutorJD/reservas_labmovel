@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chromebook Manager PRO</title>
+    <title>Chromebook Manager</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div id="test-indicator" class="test-indicator">MODO DE TESTE ATIVO - HORA SIMULADA</div>
 
 <div class="app-container">
     <div class="date-scroll" id="dates-container"></div>
@@ -30,13 +28,13 @@
         <input type="text" id="prof-nome" class="dark-input" placeholder="Seu Nome">
         <div class="selection-grid" id="modal-selection-grid"></div>
         <div class="hours-grid">
-            <div class="hour-chip" data-h="1">1h (07:00)</div>
-            <div class="hour-chip" data-h="2">2h (07:50)</div>
-            <div class="hour-chip" data-h="3">3h (09:00)</div>
-            <div class="hour-chip" data-h="4">4h (09:50)</div>
-            <div class="hour-chip" data-h="5">5h (10:40)</div>
-            <div class="hour-chip" data-h="6">6h (12:20)</div>
-            <div class="hour-chip" data-h="7">7h (13:10)</div>
+            <div class="hour-chip" data-h="1">1º (07:00)</div>
+            <div class="hour-chip" data-h="2">2º (07:50)</div>
+            <div class="hour-chip" data-h="3">3º (09:00)</div>
+            <div class="hour-chip" data-h="4">4º (09:50)</div>
+            <div class="hour-chip" data-h="5">5º (10:40)</div>
+            <div class="hour-chip" data-h="6">6º (12:20)</div>
+            <div class="hour-chip" data-h="7">7º (13:10)</div>
         </div>
         <input type="date" id="res-data-input" class="dark-input">
         <div class="modal-actions">
@@ -52,6 +50,29 @@
         <div class="alert-message" id="alert-message">Mensagem do alerta</div>
         <div class="alert-actions">
             <button id="alert-close-btn" class="btn-main">Ok</button>
+        </div>
+    </div>
+</div>
+
+<div class="alert-overlay" id="info-overlay" aria-live="polite" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
+    <div class="alert-card" id="info-card">
+        <div class="alert-heading" id="info-heading">Detalhes da reserva</div>
+        <div class="alert-message" id="info-message">Reservado por: ...</div>
+        <div class="alert-actions">
+            <button id="info-cancel-btn" class="secondary-button">Cancelar</button>
+            <button id="info-close-btn" class="btn-main">Ok</button>
+        </div>
+    </div>
+</div>
+
+<div class="alert-overlay" id="pin-overlay" aria-live="polite" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
+    <div class="alert-card" id="pin-card">
+        <div class="alert-heading">Confirme o PIN</div>
+        <div class="alert-message" id="pin-text">Digite o PIN da reserva para cancelar.</div>
+        <input type="text" id="pin-input" class="dark-input" maxlength="4" inputmode="numeric" placeholder="0000">
+        <div class="alert-actions">
+            <button id="pin-confirm-btn" class="btn-main">Confirmar</button>
+            <button id="pin-cancel-btn" type="button" class="secondary-button">Cancelar</button>
         </div>
     </div>
 </div>
