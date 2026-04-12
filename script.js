@@ -500,7 +500,7 @@ function hideAlert() {
 // ============================================================
 // UI — Modal de informações da reserva
 // ============================================================
-function showReservationInfo(reservation, canCancel = false) {
+function showReservationInfo(reservation, isOwner = false) {
     const overlay   = document.getElementById('info-overlay');
     const heading   = document.getElementById('info-heading');
     const content   = document.getElementById('info-message');
@@ -509,14 +509,28 @@ function showReservationInfo(reservation, canCancel = false) {
     state.pendingCancellationReservation = reservation;
     heading.textContent = 'Reserva confirmada';
     const horarioFinal = getPeriodoHorario(reservation.periodo);
-    content.textContent = `Reservado por: ${reservation.professor} até a ${horarioFinal}`;
-    cancelBtn.style.display = canCancel ? 'inline-block' : 'none';
+    content.textContent = `Reservado por: ${reservation.professor} até ${horarioFinal}`;
+
+    // Botão cancelar sempre visível, mas comportamento diferente:
+    // - dono do dispositivo → cancela direto
+    // - outro dispositivo → pede PIN primeiro
+    cancelBtn.style.display = 'inline-block';
+    cancelBtn.textContent = 'Cancelar reserva';
+    cancelBtn.onclick = () => {
+        hideReservationInfo();
+        if (isOwner) {
+            cancelReservation(reservation);
+        } else {
+            openPinOverlay(reservation);
+        }
+    };
+
     overlay.style.display = 'flex';
     overlay.setAttribute('aria-hidden', 'false');
     logger.info('ui', 'Detalhes de reserva exibidos', {
         professor: reservation.professor,
         periodo: reservation.periodo,
-        canCancel
+        isOwner
     });
 }
 
@@ -585,11 +599,9 @@ async function cancelReservation(reservation) {
 // ============================================================
 function handleReservationCardClick(reservation) {
     if (!reservation) return;
-    if (reservation.pin && reservation.pin === state.userPin) {
-        showReservationInfo(reservation, true);
-        return;
-    }
-    openPinOverlay(reservation);
+    const isOwner = reservation.pin && reservation.pin === state.userPin;
+    // Sempre abre o modal de info — PIN só é pedido ao clicar em cancelar
+    showReservationInfo(reservation, isOwner);
 }
 
 function handlePinConfirm() {
@@ -954,11 +966,7 @@ async function initApp() {
         if (event.target.id === 'alert-overlay') hideAlert();
     });
     document.getElementById('info-close-btn')?.addEventListener('click', hideReservationInfo);
-    document.getElementById('info-cancel-btn')?.addEventListener('click', () => {
-        if (state.pendingCancellationReservation) {
-            cancelReservation(state.pendingCancellationReservation);
-        }
-    });
+    // info-cancel-btn: onclick definido dinamicamente em showReservationInfo()
     document.getElementById('info-overlay')?.addEventListener('click', (event) => {
         if (event.target.id === 'info-overlay') hideReservationInfo();
     });
